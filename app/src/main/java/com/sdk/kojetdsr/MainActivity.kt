@@ -19,7 +19,9 @@ import androidx.navigation.compose.rememberNavController
 import com.sdk.kojetdsr.presentation.screen.RootNavigationGraph
 import com.sdk.kojetdsr.ui.theme.KojetDsrTheme
 import com.sdk.kojetdsr.ui.theme.Orange
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
