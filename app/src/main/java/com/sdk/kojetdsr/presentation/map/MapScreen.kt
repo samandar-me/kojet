@@ -15,8 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.*
 import com.sdk.kojetdsr.presentation.component.SearchAppBar
 
@@ -30,8 +32,24 @@ fun MapScreen(navHostController: NavHostController) {
         MapUiSettings(zoomControlsEnabled = false)
     }
 
+    var searched by remember {
+        mutableStateOf(false)
+    }
+
     val state by remember {
         viewModel.state
+    }
+
+    val cameraPositionState = rememberCameraPositionState {
+        position = CameraPosition.fromLatLngZoom(state.location, 4f)
+    }
+
+    if (searched) {
+        LaunchedEffect(key1 = state.location) {
+            cameraPositionState.animate(
+                update = CameraUpdateFactory.newLatLngZoom(state.location, 10f),
+            )
+        }
     }
 
     Scaffold(
@@ -53,17 +71,10 @@ fun MapScreen(navHostController: NavHostController) {
             onMapClick = {
                 viewModel.onEvent(MapEvent.OnMapClicked(it))
             },
-            cameraPositionState = CameraPositionState(
-                CameraPosition(
-                    state.searchedLocation,
-                    4f,
-                    5f,
-                    0f
-                )
-            ),
+            cameraPositionState = cameraPositionState
         ) {
             Marker(
-                position = state.latLng,
+                position = state.location,
                 title = state.text,
                 icon = BitmapDescriptorFactory.defaultMarker(
                     BitmapDescriptorFactory.HUE_BLUE
@@ -79,6 +90,7 @@ fun MapScreen(navHostController: NavHostController) {
             },
             onSearchClicked = {
                 viewModel.onEvent(MapEvent.OnSearchClicked(it))
+                searched = true
             },
             onBackClick = {
                 navHostController.popBackStack()

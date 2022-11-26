@@ -22,29 +22,27 @@ class MapViewModel @Inject constructor(
     private val _state: MutableState<MapState> = mutableStateOf(MapState())
     val state: State<MapState> get() = _state
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun onEvent(event: MapEvent) {
         when (event) {
             is MapEvent.OnTextChanged -> {
                 _state.value = _state.value.copy(text = event.text)
             }
             is MapEvent.OnMapClicked -> {
-                _state.value = _state.value.copy(latLng = event.latLng)
+                _state.value = _state.value.copy(location = event.latLng)
             }
             is MapEvent.OnSearchClicked -> {
                 if (event.location.isNotEmpty()) {
                     val geocoder = Geocoder(app.applicationContext)
                     try {
-                        geocoder.getFromLocationName(
+                        val list = geocoder.getFromLocationName(
                             event.location, 1
-                        ) {
-                            _state.value = _state.value.copy(
-                                searchedLocation = LatLng(
-                                    it[0].latitude,
-                                    it[0].longitude
-                                )
+                        )
+                        _state.value = _state.value.copy(
+                            location = LatLng(
+                                list?.get(0)?.latitude!!,
+                                list[0]?.longitude!!
                             )
-                        }
+                        )
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
