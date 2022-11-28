@@ -1,8 +1,85 @@
 package com.sdk.kojetdsr.presentation.map
 
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.sdk.kojetdsr.R
+import com.sdk.kojetdsr.ui.theme.Orange
+import com.sdk.kojetdsr.util.Graph
+import kotlinx.coroutines.launch
 
 @Composable
-fun MapDetailScreen() {
-
+fun MapDetailScreen(navHostController: NavHostController) {
+    var text by remember {
+        mutableStateOf("")
+    }
+    val scaffoldState = rememberScaffoldState()
+    val coroutineScope = rememberCoroutineScope()
+    var clicked by remember {
+        mutableStateOf(false)
+    }
+    if (clicked) {
+        LaunchedEffect(key1 = Unit) {
+            navHostController.navigate(Graph.HOME) {
+                popUpTo("MAP_DETAIL") {
+                    inclusive = true
+                }
+            }
+            clicked = false
+        }
+    }
+    Scaffold(
+        scaffoldState = scaffoldState,
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = stringResource(id = R.string.location_name), color = Color.White)
+                },
+                backgroundColor = Orange
+            )
+        },
+        bottomBar = {
+            Button(
+                onClick = {
+                    if (text.isNotBlank()) {
+                        clicked = true
+                    } else {
+                        coroutineScope.launch {
+                            scaffoldState.snackbarHostState.showSnackbar("Enter location name!")
+                        }
+                    }
+                }, modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 15.dp, end = 15.dp, bottom = 5.dp)
+                    .height(48.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Orange)
+            ) {
+                Text(text = "Next")
+            }
+        }
+    ) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            OutlinedTextField(
+                value = text,
+                onValueChange = { text = it },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 15.dp),
+                label = {
+                    Text(text = "Location name")
+                }
+            )
+        }
+    }
 }

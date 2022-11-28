@@ -45,11 +45,6 @@ fun NavGraphBuilder.detailsNavGraph(navController: NavHostController) {
                     name = "title"
                 ) {
                     type = NavType.StringType
-                },
-                navArgument(
-                    name = "id"
-                ) {
-                    type = NavType.StringType
                 }
             )
         ) {
@@ -70,7 +65,7 @@ fun NavGraphBuilder.mapsNavGraph(navController: NavHostController) {
             MapScreen(navController)
         }
         composable(route = "MAP_DETAIL") {
-            MapDetailScreen()
+            MapDetailScreen(navController)
         }
     }
 }
