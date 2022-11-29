@@ -24,8 +24,7 @@ fun DetailScreen(navHostController: NavHostController, title: String) {
             backgroundColor = Orange,
             navigationIcon = {
                 IconButton(
-                    onClick = { navHostController.popBackStack() },
-                    modifier = Modifier.weight(1f)
+                    onClick = { navHostController.popBackStack() }
                 ) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,

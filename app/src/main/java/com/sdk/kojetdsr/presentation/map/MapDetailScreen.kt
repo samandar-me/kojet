@@ -29,7 +29,7 @@ fun MapDetailScreen(navHostController: NavHostController) {
     if (clicked) {
         LaunchedEffect(key1 = Unit) {
             navHostController.navigate(Graph.HOME) {
-                popUpTo("MAP_DETAIL") {
+                popUpTo(Graph.HOME) {
                     inclusive = true
                 }
             }
@@ -41,9 +41,20 @@ fun MapDetailScreen(navHostController: NavHostController) {
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = stringResource(id = R.string.location_name), color = Color.White)
+                    Text(text = stringResource(id = R.string.location_name))
                 },
-                backgroundColor = Orange
+                backgroundColor = Orange,
+                navigationIcon = {
+                    IconButton(
+                        onClick = { navHostController.popBackStack() }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = "back",
+                            tint = Color.Black
+                        )
+                    }
+                }
             )
         },
         bottomBar = {
@@ -65,7 +76,7 @@ fun MapDetailScreen(navHostController: NavHostController) {
                 Text(text = "Next")
             }
         }
-    ) {
+    ) { padding ->
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center

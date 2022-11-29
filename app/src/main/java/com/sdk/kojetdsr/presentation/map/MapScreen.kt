@@ -82,12 +82,7 @@ fun MapScreen(navHostController: NavHostController) {
             AnimatedVisibility(visible = isFabVisible) {
                 Button(
                     onClick = {
-                        navHostController.navigate("MAP_DETAIL") {
-                            popUpTo("MAP") {
-                                inclusive = true
-                                saveState = true
-                            }
-                        }
+                        navHostController.navigate("MAP_DETAIL")
                     }, modifier = Modifier
                         .fillMaxWidth()
                         .padding(start = 15.dp, end = 15.dp, bottom = 5.dp)

@@ -7,7 +7,6 @@ import com.sdk.kojetdsr.util.Graph
 
 @Composable
 fun AllScreen(navHostController: NavHostController) {
-    Button(onClick = { navHostController.navigate("${Graph.DETAILS}/Tashkent") }) {
 
-    }
 }
+//"${Graph.DETAILS}/Tashkent"
