@@ -8,8 +8,8 @@ import com.sdk.kojetdsr.presentation.bottom.detail.DetailScreen
 import com.sdk.kojetdsr.presentation.bottom.location.locationscreen.LocationScreen
 import com.sdk.kojetdsr.presentation.bottom.settings.SettingsScreen
 import com.sdk.kojetdsr.presentation.bottom.trigger.TriggersScreen
-import com.sdk.kojetdsr.presentation.map.MapDetailScreen
-import com.sdk.kojetdsr.presentation.map.MapScreen
+import com.sdk.kojetdsr.presentation.map.detail.MapDetailScreen
+import com.sdk.kojetdsr.presentation.map.map_screen.MapScreen
 import com.sdk.kojetdsr.util.Graph
 
 @Composable

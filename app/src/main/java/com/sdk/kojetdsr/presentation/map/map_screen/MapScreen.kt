@@ -1,9 +1,6 @@
-package com.sdk.kojetdsr.presentation.map
+package com.sdk.kojetdsr.presentation.map.map_screen
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -13,7 +10,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationSearching
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -22,7 +18,6 @@ import androidx.navigation.NavHostController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.*
 import com.sdk.kojetdsr.presentation.component.SearchAppBar
 import com.sdk.kojetdsr.ui.theme.Orange

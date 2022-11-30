@@ -1,8 +1,10 @@
 package com.sdk.data.remote.mappers
 
+import com.sdk.data.local.entity.LocationNameEntity
 import com.sdk.data.remote.dto.CurrentWeatherDTO
 import com.sdk.data.remote.dto.WeatherDTO
 import com.sdk.domain.model.CurrentWeather
+import com.sdk.domain.model.LocationName
 import com.sdk.domain.model.Weather
 
 internal fun CurrentWeatherDTO.toCurrentWeather(): CurrentWeather {
@@ -28,7 +30,7 @@ internal fun CurrentWeatherDTO.toCurrentWeather(): CurrentWeather {
     )
 }
 
-fun WeatherDTO.toWeather(): Weather {
+internal fun WeatherDTO.toWeather(): Weather {
     return Weather(
         main = main,
         description = description,
@@ -36,3 +38,20 @@ fun WeatherDTO.toWeather(): Weather {
         icon = icon
     )
 }
+
+fun LocationName.toLocationEntity(): LocationNameEntity {
+    return LocationNameEntity(
+        id = id,
+        name = name,
+        isSaved = isSaved
+    )
+}
+
+fun LocationNameEntity.toLocationName(): LocationName {
+    return LocationName(
+        id = id,
+        name = name,
+        isSaved = isSaved
+    )
+}
+

@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "LocationName")
 data class LocationNameEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int = 0,
     @ColumnInfo(name = "locationName")
     val name: String,
     @ColumnInfo(name = "isLocationSaved")
-    val isSaved: Boolean
+    val isSaved: Boolean = false
 )

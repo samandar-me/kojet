@@ -1,4 +1,4 @@
-package com.sdk.kojetdsr.presentation.map
+package com.sdk.kojetdsr.presentation.map.map_screen
 
 import com.google.android.gms.maps.model.LatLng
 

@@ -1,4 +1,4 @@
-package com.sdk.kojetdsr.presentation.map
+package com.sdk.kojetdsr.presentation.map.detail
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.sdk.kojetdsr.R
 import com.sdk.kojetdsr.ui.theme.Orange
@@ -18,6 +19,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun MapDetailScreen(navHostController: NavHostController) {
+    val viewModel: MapDetailViewModel = hiltViewModel()
     var text by remember {
         mutableStateOf("")
     }
@@ -28,6 +30,7 @@ fun MapDetailScreen(navHostController: NavHostController) {
     }
     if (clicked) {
         LaunchedEffect(key1 = Unit) {
+            viewModel.saveLocationName(text)
             navHostController.navigate(Graph.HOME) {
                 popUpTo(Graph.HOME) {
                     inclusive = true
@@ -78,7 +81,9 @@ fun MapDetailScreen(navHostController: NavHostController) {
         }
     ) { padding ->
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding.calculateBottomPadding()),
             contentAlignment = Alignment.Center
         ) {
             OutlinedTextField(

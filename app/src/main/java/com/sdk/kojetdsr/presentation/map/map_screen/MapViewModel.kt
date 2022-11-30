@@ -1,24 +1,18 @@
-package com.sdk.kojetdsr.presentation.map
+package com.sdk.kojetdsr.presentation.map.map_screen
 
-import android.app.Application
-import android.location.Address
 import android.location.Geocoder
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.model.LatLng
-import com.sdk.domain.use_cases.AllUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class MapViewModel @Inject constructor(
-    private val app: Application,
-    private val useCases: AllUseCases
-) : AndroidViewModel(app) {
+    private val geocoder: Geocoder
+) : ViewModel() {
     private val _state: MutableState<MapState> = mutableStateOf(MapState())
     val state: State<MapState> get() = _state
 
@@ -32,7 +26,6 @@ class MapViewModel @Inject constructor(
             }
             is MapEvent.OnSearchClicked -> {
                 if (event.location.isNotEmpty()) {
-                    val geocoder = Geocoder(app.applicationContext)
                     try {
                         val list = geocoder.getFromLocationName(
                             event.location, 1

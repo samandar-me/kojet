@@ -1,13 +1,19 @@
 package com.sdk.kojetdsr.di
 
+import android.content.Context
+import android.location.Geocoder
+import com.sdk.data.local.database.LocationNameDao
 import com.sdk.data.remote.api.WeatherService
-import com.sdk.data.remote.repository.WeatherRepositoryImpl
+import com.sdk.data.repository.WeatherRepositoryImpl
 import com.sdk.domain.repository.WeatherRepository
 import com.sdk.domain.use_cases.AllUseCases
 import com.sdk.domain.use_cases.GetCurrentWeatherUseCase
+import com.sdk.domain.use_cases.GetLocationNamesUseCase
+import com.sdk.domain.use_cases.SaveLocationNameUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,9 +22,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [DatabaseModule::class])
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
+    @Singleton
+    @Provides
+    fun provideGeocoder(@ApplicationContext context: Context): Geocoder {
+        return Geocoder(context)
+    }
 
     @Singleton
     @Provides
@@ -45,15 +57,17 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideWeatherRepository(service: WeatherService): WeatherRepository {
-        return WeatherRepositoryImpl(service)
+    fun provideWeatherRepository(service: WeatherService, dao: LocationNameDao): WeatherRepository {
+        return WeatherRepositoryImpl(service, dao)
     }
 
     @Singleton
     @Provides
     fun provideAllUseCases(repository: WeatherRepository): AllUseCases {
         return AllUseCases(
-            getCurrentWeatherUseCase = GetCurrentWeatherUseCase(repository)
+            getCurrentWeatherUseCase = GetCurrentWeatherUseCase(repository),
+            saveLocationNameBaseUseCase = SaveLocationNameUseCase(repository),
+            getLocationNamesUseCase = GetLocationNamesUseCase(repository)
         )
     }
 }

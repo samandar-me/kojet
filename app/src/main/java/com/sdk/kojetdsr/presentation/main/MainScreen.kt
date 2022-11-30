@@ -1,6 +1,8 @@
 package com.sdk.kojetdsr.presentation.main
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -23,21 +25,12 @@ fun MainScreen(navController: NavHostController = rememberNavController()) {
     }
     LaunchedEffect(key1 = navController) {
         navController.currentBackStackEntryFlow.collect {
-            when (it.destination.route) {
+            isFab = when (it.destination.route) {
                 BottomBarScreen.Locations.route -> {
-                    isFab = true
-                }
-                BottomBarScreen.Triggers.route -> {
-                    isFab = false
-                }
-                BottomBarScreen.Settings.route -> {
-                    isFab = false
-                }
-                "MAP" -> {
-                    isFab = false
+                    true
                 }
                 else -> {
-                    isFab = false
+                    false
                 }
             }
         }
@@ -59,6 +52,11 @@ fun MainScreen(navController: NavHostController = rememberNavController()) {
         },
         floatingActionButtonPosition = FabPosition.Center
     ) {
-        HomeNavGraph(navController = navController)
+        Column(
+            modifier = Modifier.fillMaxSize()
+                .padding(bottom = it.calculateBottomPadding())
+        ) {
+            HomeNavGraph(navController = navController)
+        }
     }
 }
