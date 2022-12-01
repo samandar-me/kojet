@@ -3,22 +3,18 @@ package com.sdk.kojetdsr.presentation.component
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.sdk.kojetdsr.ui.theme.Orange
 import com.sdk.kojetdsr.ui.theme.Shapes
 
 @Composable
@@ -28,18 +24,16 @@ fun SearchAppBar(
     onSearchClicked: (String) -> Unit,
     onBackClick: () -> Unit
 ) {
-    Card(
+    Surface(
         modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp)
             .height(56.dp),
-        elevation = AppBarDefaults.TopAppBarElevation,
-        backgroundColor = Color.White,
-        shape = Shapes.medium
+        shape = Shapes.medium,
+        color = Color.White
     ) {
         TextField(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier,
             value = text,
             onValueChange = {
                 onTextChange(it)
@@ -52,9 +46,6 @@ fun SearchAppBar(
                     color = Color.Black
                 )
             },
-            textStyle = TextStyle(
-                fontSize = MaterialTheme.typography.subtitle1.fontSize
-            ),
             singleLine = true,
             leadingIcon = {
                 IconButton(
@@ -76,10 +67,7 @@ fun SearchAppBar(
                     onSearchClicked(text)
                 }
             ),
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color.Transparent,
-                cursorColor = Color.White.copy(alpha = ContentAlpha.medium)
-            )
+            colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.White, cursorColor = Orange)
         )
     }
 }

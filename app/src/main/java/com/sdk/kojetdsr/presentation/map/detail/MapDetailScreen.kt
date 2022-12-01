@@ -83,7 +83,7 @@ fun MapDetailScreen(navHostController: NavHostController) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding.calculateBottomPadding()),
+                .padding(padding),
             contentAlignment = Alignment.Center
         ) {
             OutlinedTextField(

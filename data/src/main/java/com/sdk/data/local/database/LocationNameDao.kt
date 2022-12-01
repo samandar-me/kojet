@@ -15,6 +15,6 @@ interface LocationNameDao {
 //    @Query("SELECT EXISTS(SELECT 1 FROM LocationName WHERE id = :nameId LIMIT 1)")
 //    fun isExists(nameId: String): Flow<Boolean>
 
-    @Query("SELECT * FROM LocationName")
+    @Query("SELECT * FROM LocationName ORDER BY id DESC")
     fun getAllLocationNames(): Flow<List<LocationNameEntity>>
 }

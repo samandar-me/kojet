@@ -110,4 +110,6 @@ dependencies {
     implementation "androidx.room:room-ktx:2.4.3"
     annotationProcessor "androidx.room:room-compiler:2.4.3"
     kapt "androidx.room:room-compiler:2.4.3"
+
+    implementation "com.airbnb.android:lottie-compose:5.2.0"
 }

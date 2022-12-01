@@ -88,7 +88,7 @@ fun MapScreen(navHostController: NavHostController) {
                 }
             }
         },
-    ) {
+    ) { padding ->
         GoogleMap(
             modifier = Modifier.fillMaxSize(),
             properties = MapProperties(),

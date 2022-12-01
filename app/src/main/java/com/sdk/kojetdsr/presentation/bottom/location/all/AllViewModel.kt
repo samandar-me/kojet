@@ -31,7 +31,7 @@ class AllViewModel @Inject constructor(
             useCases.getLocationNamesUseCase("")
                 .onStart {
                     _state.value = _state.value.copy(isLoading = true)
-                    delay(500L)
+                    delay(600L)
                 }
                 .catch {
                     _state.value =
