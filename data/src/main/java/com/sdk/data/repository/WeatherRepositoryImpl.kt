@@ -46,4 +46,12 @@ class WeatherRepositoryImpl @Inject constructor(
     override suspend fun deleteLocationName(locationName: LocationName) {
         dao.deleteLocationName(locationName.toLocationEntity())
     }
+
+    override suspend fun updateLocationName(locationName: LocationName) {
+        dao.updateLocationName(locationName.toLocationEntity())
+    }
+
+    override suspend fun updateFavoriteLocationName(id: Int, isSaved: Boolean) {
+        dao.updateFavLocation(id, isSaved)
+    }
 }

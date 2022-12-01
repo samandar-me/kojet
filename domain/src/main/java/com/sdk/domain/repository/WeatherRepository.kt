@@ -10,4 +10,6 @@ interface WeatherRepository {
     suspend fun saveLocationName(locationName: LocationName)
     fun getAllLocations(): Flow<List<LocationName>>
     suspend fun deleteLocationName(locationName: LocationName)
+    suspend fun updateLocationName(locationName: LocationName)
+    suspend fun updateFavoriteLocationName(id: Int, isSaved: Boolean)
 }

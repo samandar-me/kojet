@@ -9,10 +9,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.sdk.domain.model.FavLocationName
 import com.sdk.domain.model.LocationName
 import com.sdk.kojetdsr.presentation.component.Empty
 import com.sdk.kojetdsr.presentation.component.Loading
@@ -40,11 +38,11 @@ fun AllScreen(navHostController: NavHostController) {
         LazyColumn(
             contentPadding = PaddingValues(5.dp)
         ) {
-            itemsIndexed(list) { index, item ->
+            itemsIndexed(list, key = { _, item -> item.id }) { index, item ->
                 LocationNameItem(
                     locationName = item,
                     onFavoriteClick = {
-
+                        viewModel.onEvent(AllEvent.OnFavoriteClick(FavLocationName(item.id, !item.isSaved)))
                     },
                     onItemClick = {
 
@@ -69,8 +67,11 @@ fun LocationNameItem(
     onItemClick: () -> Unit,
     onFavoriteClick: () -> Unit
 ) {
+    var isSaved by remember {
+        mutableStateOf(false)
+    }
     val icon by remember {
-        mutableStateOf(if (locationName.isSaved) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder)
+        mutableStateOf(if (isSaved) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder)
     }
     Row(
         modifier = Modifier
@@ -83,10 +84,15 @@ fun LocationNameItem(
             text = locationName.name,
             fontSize = 16.sp,
             color = Color.Black,
-            modifier = Modifier.weight(1f).padding(start = 5.dp)
+            modifier = Modifier
+                .weight(1f)
+                .padding(start = 5.dp)
         )
         Spacer(modifier = Modifier.width(2.dp))
-        IconButton(onClick = { onFavoriteClick() }) {
+        IconButton(onClick = {
+            //onFavoriteClick()
+            isSaved = !isSaved
+        }) {
             Icon(imageVector = icon, contentDescription = "Favorite", tint = Color.Black)
         }
     }

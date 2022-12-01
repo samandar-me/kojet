@@ -6,10 +6,7 @@ import com.sdk.data.local.database.LocationNameDao
 import com.sdk.data.remote.api.WeatherService
 import com.sdk.data.repository.WeatherRepositoryImpl
 import com.sdk.domain.repository.WeatherRepository
-import com.sdk.domain.use_cases.AllUseCases
-import com.sdk.domain.use_cases.GetCurrentWeatherUseCase
-import com.sdk.domain.use_cases.GetLocationNamesUseCase
-import com.sdk.domain.use_cases.SaveLocationNameUseCase
+import com.sdk.domain.use_cases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -67,7 +64,9 @@ object NetworkModule {
         return AllUseCases(
             getCurrentWeatherUseCase = GetCurrentWeatherUseCase(repository),
             saveLocationNameBaseUseCase = SaveLocationNameUseCase(repository),
-            getLocationNamesUseCase = GetLocationNamesUseCase(repository)
+            getLocationNamesUseCase = GetLocationNamesUseCase(repository),
+            updateLocationNameUseCase = UpdateLocationNameUseCase(repository),
+            updateFavLocationName = UpdateFavLocationName(repository)
         )
     }
 }

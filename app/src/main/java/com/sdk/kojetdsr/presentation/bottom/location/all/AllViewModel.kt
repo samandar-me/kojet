@@ -6,6 +6,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sdk.domain.model.LocationName
 import com.sdk.domain.use_cases.AllUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -47,7 +48,9 @@ class AllViewModel @Inject constructor(
     fun onEvent(event: AllEvent) {
         when (event) {
             is AllEvent.OnFavoriteClick -> {
-
+                viewModelScope.launch {
+                    useCases.updateFavLocationName(event.name)
+                }
             }
             is AllEvent.OnItemClick -> {
 
