@@ -2,7 +2,7 @@ package com.sdk.kojetdsr.presentation.map.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sdk.domain.use_cases.AllUseCases
+import com.sdk.domain.use_cases.base.AllUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

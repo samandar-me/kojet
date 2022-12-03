@@ -2,6 +2,7 @@ package com.sdk.kojetdsr.di
 
 import android.content.Context
 import androidx.room.Room
+import com.sdk.data.local.database.FavoriteDao
 import com.sdk.data.local.database.LocationNameDao
 import com.sdk.data.local.database.WeatherDatabase
 import dagger.Module
@@ -28,5 +29,10 @@ object DatabaseModule {
     @Provides
     fun provideLocationNameDao(database: WeatherDatabase): LocationNameDao {
         return database.dao
+    }
+    @Singleton
+    @Provides
+    fun provideFavoriteDao(database: WeatherDatabase): FavoriteDao {
+        return database.favoriteDao
     }
 }

@@ -2,11 +2,17 @@ package com.sdk.kojetdsr.di
 
 import android.content.Context
 import android.location.Geocoder
+import com.sdk.data.local.database.FavoriteDao
 import com.sdk.data.local.database.LocationNameDao
 import com.sdk.data.remote.api.WeatherService
-import com.sdk.data.repository.WeatherRepositoryImpl
-import com.sdk.domain.repository.WeatherRepository
+import com.sdk.data.repository.WeatherLocalRepositoryImpl
+import com.sdk.data.repository.WeatherRemoteRepositoryImpl
+import com.sdk.domain.repository.WeatherLocalRepository
+import com.sdk.domain.repository.WeatherRemoteRepository
 import com.sdk.domain.use_cases.*
+import com.sdk.domain.use_cases.base.AllUseCases
+import com.sdk.domain.use_cases.remote.*
+import com.sdk.domain.use_cases.local.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -54,19 +60,26 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideWeatherRepository(service: WeatherService, dao: LocationNameDao): WeatherRepository {
-        return WeatherRepositoryImpl(service, dao)
+    fun provideWeatherRepository(dao: LocationNameDao, favoriteDao: FavoriteDao): WeatherLocalRepository {
+        return WeatherLocalRepositoryImpl(dao, favoriteDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideWeatherRemoteRepository(service: WeatherService): WeatherRemoteRepository {
+        return WeatherRemoteRepositoryImpl(service)
     }
 
     @Singleton
     @Provides
-    fun provideAllUseCases(repository: WeatherRepository): AllUseCases {
+    fun provideAllUseCases(localRepo: WeatherLocalRepository, remoteRepo: WeatherRemoteRepository,): AllUseCases {
         return AllUseCases(
-            getCurrentWeatherUseCase = GetCurrentWeatherUseCase(repository),
-            saveLocationNameBaseUseCase = SaveLocationNameUseCase(repository),
-            getLocationNamesUseCase = GetLocationNamesUseCase(repository),
-            updateLocationNameUseCase = UpdateLocationNameUseCase(repository),
-            updateFavLocationName = UpdateFavLocationName(repository)
+            getCurrentWeatherUseCase = GetCurrentWeatherUseCase(remoteRepo),
+            saveLocationNameBaseUseCase = SaveLocationNameUseCase(localRepo),
+            getLocationNamesUseCase = GetLocationNamesUseCase(localRepo),
+            updateFavLocationName = UpdateFavLocationName(localRepo),
+            saveFavoriteNameUseCase = SaveFavoriteNameUseCase(localRepo),
+            getFavoriteNamesUseCase = GetFavoriteNamesUseCase(localRepo)
         )
     }
 }

@@ -1,15 +1,12 @@
 package com.sdk.kojetdsr.presentation.bottom.location.all
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sdk.domain.use_cases.AllUseCases
+import com.sdk.domain.model.FavoriteLocationName
+import com.sdk.domain.use_cases.base.AllUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,8 +14,8 @@ import javax.inject.Inject
 class AllViewModel @Inject constructor(
     private val useCases: AllUseCases
 ) : ViewModel() {
-    private val _state: MutableState<AllState> = mutableStateOf(AllState())
-    val state: State<AllState> get() = _state
+    private val _state: MutableStateFlow<AllState> = MutableStateFlow(AllState())
+    val state: StateFlow<AllState> get() = _state
 
     init {
         getAllLocationNames()
@@ -28,15 +25,16 @@ class AllViewModel @Inject constructor(
         viewModelScope.launch {
             useCases.getLocationNamesUseCase("")
                 .onStart {
-                    _state.value = _state.value.copy(isLoading = true)
+                    _state.update {
+                        it.copy(isLoading = true)
+                    }
                     delay(600L)
                 }
-                .catch {
-                    _state.value =
-                        _state.value.copy(error = it.stackTraceToString(), isLoading = false)
+                .catch { t ->
+                    _state.update { it.copy(isLoading = false, error = t.message.toString()) }
                 }
-                .collect {
-                    _state.value = _state.value.copy(isLoading = false, success = it)
+                .collect { list ->
+                    _state.update { it.copy(isLoading = false, success = list) }
                 }
         }
     }
@@ -46,10 +44,12 @@ class AllViewModel @Inject constructor(
             is AllEvent.OnFavoriteClick -> {
                 viewModelScope.launch {
                     useCases.updateFavLocationName(event.name)
+                    if (event.name.isSaved) {
+                        useCases.saveFavoriteNameUseCase(FavoriteLocationName(name = event.name.name))
+                    } else {
+                        useCases.deleteFavoriteNameUseCase(FavoriteLocationName(name = event.name.name))
+                    }
                 }
-            }
-            is AllEvent.OnItemClick -> {
-
             }
         }
     }

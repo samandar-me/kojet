@@ -1,6 +1,7 @@
 package com.sdk.domain.model
 
-data class FavLocationName(
+data class UpdateFavLocationName(
     val id: Int,
+    val name: String,
     val isSaved: Boolean
 )

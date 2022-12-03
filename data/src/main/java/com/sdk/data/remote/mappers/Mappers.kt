@@ -1,9 +1,11 @@
 package com.sdk.data.remote.mappers
 
+import com.sdk.data.local.entity.FavoriteLocationEntity
 import com.sdk.data.local.entity.LocationNameEntity
 import com.sdk.data.remote.dto.CurrentWeatherDTO
 import com.sdk.data.remote.dto.WeatherDTO
 import com.sdk.domain.model.CurrentWeather
+import com.sdk.domain.model.FavoriteLocationName
 import com.sdk.domain.model.LocationName
 import com.sdk.domain.model.Weather
 
@@ -55,3 +57,15 @@ fun LocationNameEntity.toLocationName(): LocationName {
     )
 }
 
+fun FavoriteLocationEntity.toFavoriteName(): FavoriteLocationName {
+    return FavoriteLocationName(
+        id = id,
+        name = name
+    )
+}
+fun FavoriteLocationName.toFavoriteEntity(): FavoriteLocationEntity {
+    return FavoriteLocationEntity(
+        id = id,
+        name = name
+    )
+}
