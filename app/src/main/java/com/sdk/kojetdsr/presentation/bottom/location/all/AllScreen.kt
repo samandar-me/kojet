@@ -1,5 +1,6 @@
 package com.sdk.kojetdsr.presentation.bottom.location.all
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -21,6 +22,7 @@ import com.sdk.domain.model.FavLocationName
 import com.sdk.domain.model.LocationName
 import com.sdk.kojetdsr.presentation.component.Empty
 import com.sdk.kojetdsr.presentation.component.Loading
+import timber.log.Timber
 
 @Composable
 fun AllScreen(navHostController: NavHostController) {
@@ -68,7 +70,7 @@ fun LocationNameItem(
     onFavoriteClick: () -> Unit
 ) {
     var isSaved by remember {
-        mutableStateOf(false)
+        mutableStateOf(locationName.isSaved)
     }
     val icon by remember {
         mutableStateOf(if (isSaved) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder)
@@ -77,7 +79,9 @@ fun LocationNameItem(
         modifier = Modifier
             .fillMaxWidth()
             .padding(6.dp)
-            .clickable { onItemClick() },
+            .clickable {
+                onItemClick()
+            },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
@@ -89,10 +93,10 @@ fun LocationNameItem(
                 .padding(start = 5.dp)
         )
         Spacer(modifier = Modifier.width(2.dp))
-        IconButton(onClick = {
-            //onFavoriteClick()
+        IconToggleButton(checked = isSaved, onCheckedChange = {
+            onFavoriteClick()
             isSaved = !isSaved
-        }) {
+        } ) {
             Icon(imageVector = icon, contentDescription = "Favorite", tint = Color.Black)
         }
     }
