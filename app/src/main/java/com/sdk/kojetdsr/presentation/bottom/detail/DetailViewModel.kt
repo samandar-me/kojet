@@ -50,11 +50,19 @@ class DetailViewModel @Inject constructor(
                 }
             }
             is DetailEvent.OnDeleteClicked -> {
-
+                viewModelScope.launch {
+                    useCases.deleteFavNameUseCase(event.name.name)
+                    useCases.deleteLocationNameUseCase(event.name)
+                }
             }
             is DetailEvent.OnRefreshSwiped -> {
 
             }
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        println("@@@@ViewModelCleared")
     }
 }

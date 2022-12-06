@@ -46,7 +46,7 @@ fun MainScreen(navController: NavHostController = rememberNavController()) {
                     onClick = { navController.navigate(Graph.MAP) },
                     backgroundColor = Orange
                 ) {
-                    Icon(imageVector = Icons.Filled.Add, contentDescription = "Add", tint = Grey10)
+                    Icon(imageVector = Icons.Filled.Add, contentDescription = "Add", tint = MaterialTheme.colors.onSecondary)
                 }
             }
         },

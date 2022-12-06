@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -65,7 +66,7 @@ fun RowScope.AddItem(
             it.route == screen.route
         } == true,
         unselectedContentColor = Grey95,
-        selectedContentColor = Grey10,
+        selectedContentColor = MaterialTheme.colors.onSecondary,
         onClick = {
             navController.navigate(screen.route) {
                 popUpTo(navController.graph.findStartDestination().id)

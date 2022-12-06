@@ -53,8 +53,7 @@ fun MapDetailScreen(navHostController: NavHostController) {
                     ) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "back",
-                            tint = Color.Black
+                            contentDescription = "back"
                         )
                     }
                 }
@@ -94,7 +93,12 @@ fun MapDetailScreen(navHostController: NavHostController) {
                     .padding(horizontal = 15.dp),
                 label = {
                     Text(text = "Location name")
-                }
+                },
+                colors = TextFieldDefaults.textFieldColors(
+                    cursorColor = Orange,
+                    focusedIndicatorColor = Orange,
+                    focusedLabelColor = Orange
+                )
             )
         }
     }

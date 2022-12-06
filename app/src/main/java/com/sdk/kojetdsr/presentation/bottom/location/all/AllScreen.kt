@@ -50,7 +50,7 @@ fun AllScreen(navHostController: NavHostController) {
                     )
                 },
                 onItemClick = {
-                    navHostController.navigate("${Graph.DETAILS}/$it/true")
+                    navHostController.navigate("${Graph.DETAILS}/${it.id}/${it.name}/true")
                 }
             )
             if (index < state.success.lastIndex) {
@@ -68,7 +68,7 @@ fun AllScreen(navHostController: NavHostController) {
 @Composable
 fun LocationNameItem(
     locationName: LocationName,
-    onItemClick: (String) -> Unit,
+    onItemClick: (LocationName) -> Unit,
     onFavoriteClick: () -> Unit
 ) {
     Row(
@@ -76,14 +76,14 @@ fun LocationNameItem(
             .fillMaxWidth()
             .padding(6.dp)
             .clickable {
-                onItemClick(locationName.name)
+                onItemClick(locationName)
             },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             text = locationName.name,
             fontSize = 16.sp,
-            color = Color.Black,
+            color = MaterialTheme.colors.onSecondary,
             modifier = Modifier
                 .weight(1f)
                 .padding(start = 5.dp)
@@ -95,7 +95,7 @@ fun LocationNameItem(
             Icon(
                 imageVector = if (locationName.isSaved) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
                 contentDescription = "Favorite",
-                tint = Color.Black
+                tint = MaterialTheme.colors.onSecondary
             )
         }
     }

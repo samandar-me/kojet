@@ -43,7 +43,7 @@ fun SearchAppBar(
                     modifier = Modifier
                         .alpha(ContentAlpha.medium),
                     text = "Search",
-                    color = Color.Black
+                    color = Color.Gray
                 )
             },
             singleLine = true,
@@ -67,7 +67,7 @@ fun SearchAppBar(
                     onSearchClicked(text)
                 }
             ),
-            colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.White, cursorColor = Orange)
+            colors = TextFieldDefaults.textFieldColors(textColor = Color.Black, backgroundColor = Color.White, cursorColor = Orange)
         )
     }
 }

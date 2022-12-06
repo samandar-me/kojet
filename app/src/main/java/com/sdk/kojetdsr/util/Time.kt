@@ -7,7 +7,7 @@ import java.util.*
 
 object Time {
     fun getCurrentTime(): String {
-        val dateFormat = SimpleDateFormat("EEE,dd-MMM", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("EEE,MMM dd", Locale.getDefault())
         return dateFormat.format(Date())
     }
 }

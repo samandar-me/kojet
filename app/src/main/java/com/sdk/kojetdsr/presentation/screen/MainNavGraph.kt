@@ -35,12 +35,17 @@ fun HomeNavGraph(navController: NavHostController) {
 
 fun NavGraphBuilder.detailsNavGraph(navController: NavHostController) {
     navigation(
-        route = "${Graph.DETAILS}/{title}/{view}",
+        route = "${Graph.DETAILS}/{id}/{title}/{view}",
         startDestination = "DETAIL",
     ) {
         composable(
             route = "DETAIL",
             arguments = listOf(
+                navArgument(
+                    name = "id",
+                ) {
+                  type = NavType.StringType
+                },
                 navArgument(
                     name = "title"
                 ) {
@@ -51,9 +56,10 @@ fun NavGraphBuilder.detailsNavGraph(navController: NavHostController) {
                 }
             )
         ) {
+            val id = it.arguments?.getString("id") ?: ""
             val title = it.arguments?.getString("title") ?: ""
             val view = it.arguments?.getString("view") ?: ""
-            DetailScreen(navHostController = navController, title = title, view = view)
+            DetailScreen(navHostController = navController, id = id.toInt(), title = title, view = view)
         }
     }
 }

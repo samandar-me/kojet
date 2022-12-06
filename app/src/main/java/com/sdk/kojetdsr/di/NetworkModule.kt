@@ -82,7 +82,8 @@ object NetworkModule {
             updateFavLocationName = UpdateFavLocationName(localRepo),
             saveFavoriteNameUseCase = SaveFavoriteNameUseCase(localRepo),
             getFavoriteNamesUseCase = GetFavoriteNamesUseCase(localRepo),
-            deleteFavNameUseCase = DeleteFavNameUseCase(localRepo)
+            deleteFavNameUseCase = DeleteFavNameUseCase(localRepo),
+            deleteLocationNameUseCase = DeleteLocationNameUseCase(localRepo)
         )
     }
     @Provides
