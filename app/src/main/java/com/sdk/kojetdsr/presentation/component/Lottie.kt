@@ -1,5 +1,6 @@
 package com.sdk.kojetdsr.presentation.component
 
+import androidx.annotation.RawRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,16 +12,15 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.sdk.kojetdsr.R
 
 @Composable
-fun Loading(modifier: Modifier = Modifier) {
+fun ShowLottie(@RawRes anim: Int, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.loading))
+        val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(anim))
         val progress by animateLottieCompositionAsState(composition)
         LottieAnimation(
             composition = composition,

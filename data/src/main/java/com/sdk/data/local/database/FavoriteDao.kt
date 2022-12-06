@@ -13,8 +13,8 @@ interface FavoriteDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveFavoriteName(favoriteLocationEntity: FavoriteLocationEntity)
 
-    @Delete
-    suspend fun deleteFavoriteName(favoriteLocationEntity: FavoriteLocationEntity)
+    @Query("DELETE FROM FavoriteTable WHERE name = :favName")
+    suspend fun deleteByName(favName: String)
 
     @Query("SELECT * FROM FavoriteTable ORDER BY id DESC")
     fun getAllFavoriteLocations(): Flow<List<FavoriteLocationEntity>>

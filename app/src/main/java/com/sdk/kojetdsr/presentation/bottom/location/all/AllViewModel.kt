@@ -47,7 +47,7 @@ class AllViewModel @Inject constructor(
                     if (event.name.isSaved) {
                         useCases.saveFavoriteNameUseCase(FavoriteLocationName(name = event.name.name))
                     } else {
-                        useCases.deleteFavoriteNameUseCase(FavoriteLocationName(name = event.name.name))
+                       useCases.deleteFavNameUseCase(event.name.name)
                     }
                 }
             }

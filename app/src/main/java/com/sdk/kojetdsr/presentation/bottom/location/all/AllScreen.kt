@@ -18,18 +18,19 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.sdk.domain.model.UpdateFavLocationName
 import com.sdk.domain.model.LocationName
-import com.sdk.kojetdsr.presentation.component.Empty
-import com.sdk.kojetdsr.presentation.component.Loading
+import com.sdk.kojetdsr.R
+import com.sdk.kojetdsr.presentation.component.ShowLottie
+import com.sdk.kojetdsr.util.Graph
 
 @Composable
 fun AllScreen(navHostController: NavHostController) {
     val viewModel: AllViewModel = hiltViewModel()
     val state = viewModel.state.collectAsState().value
     if (state.isLoading) {
-        Loading()
+        ShowLottie(R.raw.loading)
     }
     if (state.success.isEmpty()) {
-        Empty()
+        ShowLottie(anim = R.raw.empty)
     }
     LazyColumn(
         contentPadding = PaddingValues(5.dp)
@@ -49,7 +50,7 @@ fun AllScreen(navHostController: NavHostController) {
                     )
                 },
                 onItemClick = {
-
+                    navHostController.navigate("${Graph.DETAILS}/$it/true")
                 }
             )
             if (index < state.success.lastIndex) {
@@ -67,7 +68,7 @@ fun AllScreen(navHostController: NavHostController) {
 @Composable
 fun LocationNameItem(
     locationName: LocationName,
-    onItemClick: () -> Unit,
+    onItemClick: (String) -> Unit,
     onFavoriteClick: () -> Unit
 ) {
     Row(
@@ -75,7 +76,7 @@ fun LocationNameItem(
             .fillMaxWidth()
             .padding(6.dp)
             .clickable {
-                onItemClick()
+                onItemClick(locationName.name)
             },
         verticalAlignment = Alignment.CenterVertically
     ) {

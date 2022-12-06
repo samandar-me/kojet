@@ -46,7 +46,7 @@ class WeatherLocalRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun deleteFavoriteName(name: FavoriteLocationName) {
-        favoriteDao.deleteFavoriteName(name.toFavoriteEntity())
+    override suspend fun deleteFavByName(name: String) {
+        favoriteDao.deleteByName(name)
     }
 }

@@ -13,6 +13,8 @@ import com.sdk.domain.use_cases.*
 import com.sdk.domain.use_cases.base.AllUseCases
 import com.sdk.domain.use_cases.remote.*
 import com.sdk.domain.use_cases.local.*
+import com.sdk.kojetdsr.util.Constants
+import com.sdk.kojetdsr.util.NetworkUtils
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,7 +41,7 @@ object NetworkModule {
     @Provides
     fun provideApiService(okHttpClient: OkHttpClient): WeatherService {
         return Retrofit.Builder()
-            .baseUrl("http://api.openweathermap.org/data/2.5/")
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
@@ -79,7 +81,13 @@ object NetworkModule {
             getLocationNamesUseCase = GetLocationNamesUseCase(localRepo),
             updateFavLocationName = UpdateFavLocationName(localRepo),
             saveFavoriteNameUseCase = SaveFavoriteNameUseCase(localRepo),
-            getFavoriteNamesUseCase = GetFavoriteNamesUseCase(localRepo)
+            getFavoriteNamesUseCase = GetFavoriteNamesUseCase(localRepo),
+            deleteFavNameUseCase = DeleteFavNameUseCase(localRepo)
         )
+    }
+    @Provides
+    @Singleton
+    fun provideNetworkUtils(@ApplicationContext context: Context): NetworkUtils {
+        return NetworkUtils(context)
     }
 }
