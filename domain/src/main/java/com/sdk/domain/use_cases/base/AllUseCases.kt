@@ -11,5 +11,9 @@ data class AllUseCases(
     val saveFavoriteNameUseCase: SaveFavoriteNameUseCase,
     val getFavoriteNamesUseCase: GetFavoriteNamesUseCase,
     val deleteFavNameUseCase: DeleteFavNameUseCase,
-    val deleteLocationNameUseCase: DeleteLocationNameUseCase
+    val deleteLocationNameUseCase: DeleteLocationNameUseCase,
+    val getLanguageUseCase: GetLanguageUseCase,
+    val getThemeUseCase: GetThemeUseCase,
+    val saveLanguageUseCase: SaveLanguageUseCase,
+    val saveThemeUseCase: SaveThemeUseCase
 )

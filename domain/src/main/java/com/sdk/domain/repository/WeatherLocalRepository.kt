@@ -12,4 +12,8 @@ interface WeatherLocalRepository {
     suspend fun saveFavoriteName(name: FavoriteLocationName)
     fun getAllFavoriteNames(): Flow<List<FavoriteLocationName>>
     suspend fun deleteFavByName(name: String)
+    suspend fun changeTheme(index: Int)
+    fun getTheme(): Flow<Int>
+    suspend fun changeLanguage(lan: String)
+    fun getLanguage(): Flow<String>
 }

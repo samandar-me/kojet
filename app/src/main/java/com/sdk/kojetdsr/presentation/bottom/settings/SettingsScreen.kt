@@ -34,7 +34,6 @@ fun SettingsScreen() {
             },
             backgroundColor = Orange
         )
-        Spacer(modifier = Modifier.height(10.dp))
         BoxItem(
             modifier = Modifier.padding(PaddingValues(4.dp))
         ) {
@@ -42,17 +41,20 @@ fun SettingsScreen() {
                 horizontalArrangement = Arrangement.Start,
                 modifier = Modifier.padding(5.dp)
             ) {
+                Icon(painter = painterResource(id = R.drawable.ic_baseline_language_24),
+                    contentDescription = "Language"
+                )
+                Spacer(modifier = Modifier.width(15.dp))
                 Text(
                     text = stringResource(id = R.string.language),
                     fontSize = 17.sp
                 )
-                Spacer(modifier = Modifier.width(5.dp))
-                Icon(painter = painterResource(id = R.drawable.ic_baseline_language_24),
-                    contentDescription = "Language"
-                )
             }
             Spacer(modifier = Modifier.height(3.dp))
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(4.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 Box(
                     contentAlignment = Alignment.Center,
                     modifier = Modifier
@@ -64,8 +66,10 @@ fun SettingsScreen() {
                 ) {
                     Image(painter = painterResource(id = R.drawable.uk),
                         contentDescription = "",
-                        modifier = Modifier.size(100.dp),
-                        contentScale = ContentScale.Fit
+                        modifier = Modifier
+                            .size(80.dp)
+                            .clip(RoundedCornerShape(50.dp)),
+                        contentScale = ContentScale.Crop
                     )
                 }
                 Box(
@@ -79,8 +83,78 @@ fun SettingsScreen() {
                 ) {
                     Image(painter = painterResource(id = R.drawable.rus),
                         contentDescription = "",
-                        modifier = Modifier.size(100.dp),
-                        contentScale = ContentScale.Fit
+                        modifier = Modifier
+                            .size(80.dp)
+                            .clip(RoundedCornerShape(50.dp)),
+                        contentScale = ContentScale.Crop
+                    )
+                }
+            }
+        }
+        BoxItem(
+            modifier = Modifier.padding(PaddingValues(4.dp))
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.Start,
+                modifier = Modifier.padding(5.dp)
+            ) {
+                Icon(painter = painterResource(id = R.drawable.ic_baseline_color_lens_24),
+                    contentDescription = "Language"
+                )
+                Spacer(modifier = Modifier.width(15.dp))
+                Text(
+                    text = stringResource(id = R.string.theme),
+                    fontSize = 17.sp
+                )
+            }
+            Spacer(modifier = Modifier.height(3.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(4.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .size(120.dp)
+                        .clip(RoundedCornerShape(10.dp))
+                        .clickable {
+
+                        }
+                ) {
+                    Image(painter = painterResource(id = R.drawable.ic_baseline_auto_awesome_24),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(60.dp)
+                    )
+                }
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .size(120.dp)
+                        .clip(RoundedCornerShape(10.dp))
+                        .clickable {
+
+                        }
+                ) {
+                    Image(painter = painterResource(id = R.drawable.day),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(60.dp)
+                    )
+                }
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .size(120.dp)
+                        .clip(RoundedCornerShape(10.dp))
+                        .clickable {
+
+                        }
+                ) {
+                    Image(painter = painterResource(id = R.drawable.night),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(60.dp)
                     )
                 }
             }

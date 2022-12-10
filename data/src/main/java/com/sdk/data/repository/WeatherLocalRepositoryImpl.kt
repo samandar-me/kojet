@@ -2,6 +2,7 @@ package com.sdk.data.repository
 
 import com.sdk.data.local.database.FavoriteDao
 import com.sdk.data.local.database.LocationNameDao
+import com.sdk.data.local.manager.DataStoreManager
 import com.sdk.data.remote.api.WeatherService
 import com.sdk.data.remote.mappers.*
 import com.sdk.domain.model.CurrentWeather
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 class WeatherLocalRepositoryImpl @Inject constructor(
     private val dao: LocationNameDao,
-    private val favoriteDao: FavoriteDao
+    private val favoriteDao: FavoriteDao,
+    private val manager: DataStoreManager
 ) : WeatherLocalRepository {
 
     override suspend fun saveLocationName(locationName: LocationName) {
@@ -48,5 +50,21 @@ class WeatherLocalRepositoryImpl @Inject constructor(
 
     override suspend fun deleteFavByName(name: String) {
         favoriteDao.deleteByName(name)
+    }
+
+    override suspend fun changeTheme(index: Int) {
+        manager.saveTheme(index)
+    }
+
+    override fun getTheme(): Flow<Int> {
+        return manager.getTheme()
+    }
+
+    override suspend fun changeLanguage(lan: String) {
+        manager.saveLanguage(lan)
+    }
+
+    override fun getLanguage(): Flow<String> {
+        return manager.getLanguage()
     }
 }

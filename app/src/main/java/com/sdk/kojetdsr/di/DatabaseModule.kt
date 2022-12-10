@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.sdk.data.local.database.FavoriteDao
 import com.sdk.data.local.database.LocationNameDao
 import com.sdk.data.local.database.WeatherDatabase
+import com.sdk.data.local.manager.DataStoreManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,5 +35,13 @@ object DatabaseModule {
     @Provides
     fun provideFavoriteDao(database: WeatherDatabase): FavoriteDao {
         return database.favoriteDao
+    }
+
+    @Singleton
+    @Provides
+    fun provideDataStoreManager(
+        @ApplicationContext context: Context
+    ): DataStoreManager {
+        return DataStoreManager(context)
     }
 }

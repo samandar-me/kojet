@@ -4,6 +4,7 @@ import android.content.Context
 import android.location.Geocoder
 import com.sdk.data.local.database.FavoriteDao
 import com.sdk.data.local.database.LocationNameDao
+import com.sdk.data.local.manager.DataStoreManager
 import com.sdk.data.remote.api.WeatherService
 import com.sdk.data.repository.WeatherLocalRepositoryImpl
 import com.sdk.data.repository.WeatherRemoteRepositoryImpl
@@ -62,8 +63,8 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideWeatherRepository(dao: LocationNameDao, favoriteDao: FavoriteDao): WeatherLocalRepository {
-        return WeatherLocalRepositoryImpl(dao, favoriteDao)
+    fun provideWeatherRepository(dao: LocationNameDao, favoriteDao: FavoriteDao, manager: DataStoreManager): WeatherLocalRepository {
+        return WeatherLocalRepositoryImpl(dao, favoriteDao, manager)
     }
 
     @Provides
@@ -83,7 +84,11 @@ object NetworkModule {
             saveFavoriteNameUseCase = SaveFavoriteNameUseCase(localRepo),
             getFavoriteNamesUseCase = GetFavoriteNamesUseCase(localRepo),
             deleteFavNameUseCase = DeleteFavNameUseCase(localRepo),
-            deleteLocationNameUseCase = DeleteLocationNameUseCase(localRepo)
+            deleteLocationNameUseCase = DeleteLocationNameUseCase(localRepo),
+            getLanguageUseCase = GetLanguageUseCase(localRepo),
+            getThemeUseCase = GetThemeUseCase(localRepo),
+            saveLanguageUseCase = SaveLanguageUseCase(localRepo),
+            saveThemeUseCase = SaveThemeUseCase(localRepo)
         )
     }
     @Provides
