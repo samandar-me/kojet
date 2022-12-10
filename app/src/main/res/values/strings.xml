@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">KojetDsr</string>
     <string name="location_name">Location name</string>
+    <string name="language">Language</string>
 </resources>

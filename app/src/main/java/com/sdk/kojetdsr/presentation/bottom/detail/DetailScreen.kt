@@ -3,6 +3,8 @@ package com.sdk.kojetdsr.presentation.bottom.detail
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -73,18 +75,21 @@ fun DetailScreen(navHostController: NavHostController, id: Int, title: String, v
 
         SwipeRefresh(
             state = refreshState,
-            onRefresh = { viewModel.onEvent(DetailEvent.OnRefreshSwiped) },
+            onRefresh = {
+                viewModel.onEvent(DetailEvent.OnRefreshSwiped(title))
+            },
             indicator = { state, tr ->
                 SwipeRefreshIndicator(
                     state = state,
                     refreshTriggerDistance = tr,
                     contentColor = Orange
                 )
-            },
-            modifier = Modifier.padding(2.dp)
+            }
         ) {
             Column(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
@@ -178,3 +183,4 @@ fun MyTopAppBar(
         }
     )
 }
+
