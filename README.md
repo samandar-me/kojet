@@ -5,5 +5,5 @@
 
 ## Screenshots
 <p align="center">
-<img width="834" alt="Screenshot 1444-05-17 at 20 50 22" src="https://user-images.githubusercontent.com/95674842/206913848-14ea9ade-c5d4-4e77-ae06-e63ec94ccef3.png">
+<img width="834" alt="Screenshot 1444-05-17 at 20 50 22" src="https://user-images.githubusercontent.com/95674842/206915184-d2d1e7bc-fac5-4e52-a8a5-f332e90fc233.png">
 </p>
