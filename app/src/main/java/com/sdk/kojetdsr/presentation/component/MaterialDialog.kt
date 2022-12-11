@@ -1,9 +1,13 @@
 package com.sdk.kojetdsr.presentation.component
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.*
+import androidx.compose.material.AlertDialog
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import com.sdk.kojetdsr.R
 import com.sdk.kojetdsr.ui.theme.Orange
 
 @Composable
@@ -15,8 +19,8 @@ fun MaterialDialog(
         AlertDialog(onDismissRequest = {
             onNoClicked()
         },
-            title = { Text(text = "Delete location?") },
-            text = { Text(text = "This action cannot be undone.") },
+            title = { Text(text = stringResource(R.string.delete_location)) },
+            text = { Text(text = stringResource(R.string.this_ac_cannot)) },
             confirmButton = {
                 Button(
                     onClick = {
@@ -24,7 +28,7 @@ fun MaterialDialog(
                     },
                     colors = ButtonDefaults.buttonColors(backgroundColor = Orange)
                 ) {
-                    Text(text = "Delete")
+                    Text(text = stringResource(R.string.delete))
                 }
             },
             dismissButton = {
@@ -34,7 +38,7 @@ fun MaterialDialog(
                     },
                     colors = ButtonDefaults.buttonColors(backgroundColor = Orange)
                 ) {
-                    Text(text = "Cancel")
+                    Text(text = stringResource(R.string.cancel))
                 }
             }
         )

@@ -2,15 +2,18 @@ package com.sdk.kojetdsr.presentation.main
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.sdk.kojetdsr.R
 import com.sdk.kojetdsr.presentation.component.BottomBar
 import com.sdk.kojetdsr.presentation.screen.BottomBarScreen
 import com.sdk.kojetdsr.presentation.screen.HomeNavGraph
@@ -26,12 +29,8 @@ fun MainScreen(navController: NavHostController = rememberNavController()) {
     LaunchedEffect(key1 = navController) {
         navController.currentBackStackEntryFlow.collect {
             isFab = when (it.destination.route) {
-                BottomBarScreen.Locations.route -> {
-                    true
-                }
-                else -> {
-                    false
-                }
+                BottomBarScreen.Locations.route -> true
+                else -> false
             }
         }
     }
@@ -46,14 +45,17 @@ fun MainScreen(navController: NavHostController = rememberNavController()) {
                     onClick = { navController.navigate(Graph.MAP) },
                     backgroundColor = Orange
                 ) {
-                    Icon(imageVector = Icons.Filled.Add, contentDescription = "Add", tint = MaterialTheme.colors.onSecondary)
+                    Icon(imageVector = Icons.Filled.Add,
+                        contentDescription = "Add",
+                        tint = MaterialTheme.colors.onSecondary)
                 }
             }
         },
         floatingActionButtonPosition = FabPosition.Center
     ) {
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
                 .padding(bottom = it.calculateBottomPadding())
         ) {
             HomeNavGraph(navController = navController)

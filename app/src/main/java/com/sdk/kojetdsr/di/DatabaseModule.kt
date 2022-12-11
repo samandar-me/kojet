@@ -6,6 +6,7 @@ import com.sdk.data.local.database.FavoriteDao
 import com.sdk.data.local.database.LocationNameDao
 import com.sdk.data.local.database.WeatherDatabase
 import com.sdk.data.local.manager.DataStoreManager
+import com.sdk.data.local.manager.LocalizationManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

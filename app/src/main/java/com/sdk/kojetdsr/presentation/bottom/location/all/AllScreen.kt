@@ -12,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -20,6 +21,7 @@ import com.sdk.domain.model.UpdateFavLocationName
 import com.sdk.domain.model.LocationName
 import com.sdk.kojetdsr.R
 import com.sdk.kojetdsr.presentation.component.ShowLottie
+import com.sdk.kojetdsr.ui.theme.Orange
 import com.sdk.kojetdsr.util.Graph
 
 @Composable
@@ -28,37 +30,45 @@ fun AllScreen(navHostController: NavHostController) {
     val state = viewModel.state.collectAsState().value
     if (state.isLoading) {
         ShowLottie(R.raw.loading)
-    }
-    if (state.success.isEmpty()) {
+    } else if (state.success.isEmpty()) {
         ShowLottie(anim = R.raw.empty)
     }
-    LazyColumn(
-        contentPadding = PaddingValues(5.dp)
-    ) {
-        itemsIndexed(state.success, key = { _, item -> item.id }) { index, item ->
-            LocationNameItem(
-                locationName = item,
-                onFavoriteClick = {
-                    viewModel.onEvent(
-                        AllEvent.OnFavoriteClick(
-                            UpdateFavLocationName(
-                                item.id,
-                                item.name,
-                                !item.isSaved
+
+    Column(modifier = Modifier.fillMaxSize()) {
+        TopAppBar(
+            title = {
+                Text(text = stringResource(R.string.locations))
+            },
+            backgroundColor = Orange
+        )
+        LazyColumn(
+            contentPadding = PaddingValues(5.dp)
+        ) {
+            itemsIndexed(state.success, key = { _, item -> item.id }) { index, item ->
+                LocationNameItem(
+                    locationName = item,
+                    onFavoriteClick = {
+                        viewModel.onEvent(
+                            AllEvent.OnFavoriteClick(
+                                UpdateFavLocationName(
+                                    item.id,
+                                    item.name,
+                                    !item.isSaved
+                                )
                             )
                         )
-                    )
-                },
-                onItemClick = {
-                    navHostController.navigate("${Graph.DETAILS}/${it.id}/${it.name}/true")
-                }
-            )
-            if (index < state.success.lastIndex) {
-                Divider(
-                    modifier = Modifier.padding(horizontal = 10.dp),
-                    thickness = 1.dp,
-                    color = Color.Gray
+                    },
+                    onItemClick = {
+                        navHostController.navigate("${Graph.DETAILS}/${it.id}/${it.name}/true")
+                    }
                 )
+                if (index < state.success.lastIndex) {
+                    Divider(
+                        modifier = Modifier.padding(horizontal = 10.dp),
+                        thickness = 1.dp,
+                        color = Color.Gray
+                    )
+                }
             }
         }
     }

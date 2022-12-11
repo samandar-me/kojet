@@ -12,8 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import com.sdk.kojetdsr.R
 import com.sdk.kojetdsr.ui.theme.Orange
 import com.sdk.kojetdsr.ui.theme.Shapes
 
@@ -42,7 +44,7 @@ fun SearchAppBar(
                 Text(
                     modifier = Modifier
                         .alpha(ContentAlpha.medium),
-                    text = "Search",
+                    text = stringResource(R.string.search),
                     color = Color.Gray
                 )
             },

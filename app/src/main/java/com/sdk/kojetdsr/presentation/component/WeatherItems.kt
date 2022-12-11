@@ -8,10 +8,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.coil.rememberCoilPainter
 import com.sdk.domain.model.CurrentWeather
+import com.sdk.kojetdsr.R
 import com.sdk.kojetdsr.util.Constants
 
 @Composable
@@ -19,7 +21,12 @@ fun WeatherItems(
     weather: CurrentWeather,
     modifier: Modifier = Modifier
 ) {
-    val list = listOf("Morning","Day","Evening", "Night")
+    val list = listOf(
+        stringResource(id = R.string.morning),
+        stringResource(id = R.string.day),
+        stringResource(id = R.string.evening),
+        stringResource(id = R.string.night)
+    )
     val minus = listOf(2,0,4,7)
     val temp by remember {
         mutableStateOf(Constants.calculateIntCelsius(weather.temp!!))

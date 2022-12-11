@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KojetDsr</string>
+    <string name="location_name">Joylashuv nomi</string>
+    <string name="language">Til</string>
+    <string name="theme">Mavzu</string>
+    <string name="all">Hammasi</string>
+    <string name="fav">Tanlanganlar</string>
+    <string name="locations">Joylashuvlar</string>
+    <string name="next">Keyingi</string>
+    <string name="l_name">Location name</string>
+    <string name="enter_l_name">Joylashuv nomini kiriting</string>
+    <string name="delete_location">Joylashuvni o\'chirasizmi?</string>
+    <string name="this_ac_cannot">Bu harakatni tiklab bo\'lmaydi</string>
+    <string name="delete">O\'chirish</string>
+    <string name="search">Qidirish</string>
+    <string name="pressure">bosim</string>
+    <string name="day">Kun</string>
+    <string name="evening">Oqshom</string>
+    <string name="cancel">Orqaga</string>
+    <string name="wind">shamol</string>
+    <string name="humidity">namlik</string>
+    <string name="morning" >Tong</string>
+    <string name="night">Tun</string>
+    <string name="triggers">Triggerlar</string>
+    <string name="settings">Sozlamalar</string>
+</resources>

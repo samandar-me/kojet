@@ -12,8 +12,8 @@ sealed class BottomBarScreen(
     )
 
     object Triggers : BottomBarScreen(
-        route = "Triggers",
-        icon = R.drawable.ic_baseline_notifications_24
+        route = "Favorites",
+        icon = R.drawable.ic_baseline_favorite_border_24
     )
 
     object Settings : BottomBarScreen(

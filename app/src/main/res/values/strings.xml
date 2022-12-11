@@ -3,4 +3,24 @@
     <string name="location_name">Location name</string>
     <string name="language">Language</string>
     <string name="theme">Theme</string>
+    <string name="all">All</string>
+    <string name="fav">Favorites</string>
+    <string name="locations">Locations</string>
+    <string name="next">Next</string>
+    <string name="l_name">Location name</string>
+    <string name="enter_l_name">Enter location name!</string>
+    <string name="delete_location">Delete location?</string>
+    <string name="this_ac_cannot">This action cannot be undone.</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="search">Search</string>
+    <string name="wind">wind</string>
+    <string name="humidity">humidity</string>
+    <string name="pressure">pressure</string>
+    <string name="morning">Morning</string>
+    <string name="day">Day</string>
+    <string name="evening">Evening</string>
+    <string name="night">Night</string>
+    <string name="triggers">Triggers</string>
+    <string name="settings">Settings</string>
 </resources>

@@ -8,11 +8,13 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Button
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
@@ -21,7 +23,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.sdk.domain.model.LocationName
 import com.sdk.kojetdsr.presentation.component.ShowLottie
+import com.sdk.kojetdsr.ui.theme.Orange
 import com.sdk.kojetdsr.util.Graph
+import com.sdk.kojetdsr.R
 
 @Composable
 fun FavoritesScreen(navHostController: NavHostController) {
@@ -31,20 +35,31 @@ fun FavoritesScreen(navHostController: NavHostController) {
     if (list.isEmpty()) {
         ShowLottie(anim = com.sdk.kojetdsr.R.raw.empty)
     }
-    
-    LazyColumn(
-        contentPadding = PaddingValues(5.dp)
-    ) {
-        itemsIndexed(list, key = { _, item -> item.id }) { index, item ->
-            FavoriteNameItem(name = item.name, index = index) {
-                navHostController.navigate("${Graph.DETAILS}/0/$it/false")
-            }
-            if (index < list.lastIndex) {
-                Divider(
-                    modifier = Modifier.padding(horizontal = 10.dp),
-                    thickness = 1.dp,
-                    color = Color.Gray
+
+    Column(modifier = Modifier.fillMaxSize()) {
+        TopAppBar(
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Orange,
+            title = {
+                Text(
+                    text = stringResource(id = R.string.fav)
                 )
+            }
+        )
+        LazyColumn(
+            contentPadding = PaddingValues(5.dp)
+        ) {
+            itemsIndexed(list, key = { _, item -> item.id }) { index, item ->
+                FavoriteNameItem(name = item.name, index = index) {
+                    navHostController.navigate("${Graph.DETAILS}/0/$it/false")
+                }
+                if (index < list.lastIndex) {
+                    Divider(
+                        modifier = Modifier.padding(horizontal = 10.dp),
+                        thickness = 1.dp,
+                        color = Color.Gray
+                    )
+                }
             }
         }
     }
@@ -54,7 +69,7 @@ fun FavoritesScreen(navHostController: NavHostController) {
 fun FavoriteNameItem(
     name: String,
     index: Int,
-    onItemClick: (String) -> Unit
+    onItemClick: (String) -> Unit,
 ) {
     Row(
         modifier = Modifier

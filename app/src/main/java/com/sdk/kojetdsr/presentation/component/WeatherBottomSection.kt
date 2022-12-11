@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.sdk.domain.model.CurrentWeather
 import com.sdk.kojetdsr.R
@@ -25,15 +26,15 @@ fun WeatherBottomSection(
     ) {
         Item(
             icon = R.drawable.wind,
-            text = "wind ${weather.speed} m/s"
+            text = "${stringResource(id = R.string.wind)} ${weather.speed} m/s"
         )
         Item(
             icon = R.drawable.hum,
-            text = "humidity ${weather.humidity}%"
+            text = "${stringResource(id = R.string.humidity)} ${weather.humidity}%"
         )
         Item(
             icon = R.drawable.tire,
-            text = "pressure ${weather.pressure} hpa"
+            text = "${stringResource(id = R.string.pressure)} ${weather.pressure} hpa"
         )
     }
 }
@@ -43,7 +44,9 @@ fun Item(
     @DrawableRes icon: Int,
     text: String
 ) {
-    Row(modifier = Modifier.fillMaxWidth().padding(vertical = 3.dp), verticalAlignment = Alignment.CenterVertically) {
+    Row(modifier = Modifier
+        .fillMaxWidth()
+        .padding(vertical = 3.dp), verticalAlignment = Alignment.CenterVertically) {
         Icon(painter = painterResource(id = icon), contentDescription = "", modifier = Modifier.size(38.dp))
         Text(text = text, modifier = Modifier.padding(start = 15.dp))
     }

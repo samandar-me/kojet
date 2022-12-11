@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -21,6 +22,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.maps.android.compose.*
+import com.sdk.kojetdsr.R
+import com.sdk.kojetdsr.presentation.bottom.settings.SettingsViewModel
 import com.sdk.kojetdsr.presentation.component.SearchAppBar
 import com.sdk.kojetdsr.ui.theme.Orange
 import kotlinx.coroutines.launch
@@ -28,6 +31,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun MapScreen(navHostController: NavHostController) {
     val viewModel: MapViewModel = hiltViewModel()
+    val settingsViewModel: SettingsViewModel = hiltViewModel()
+    val isDarkTheme = settingsViewModel.theme.collectAsState().value
     val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
     val uiSettings = remember {
@@ -86,7 +91,7 @@ fun MapScreen(navHostController: NavHostController) {
                         .height(48.dp),
                     colors = ButtonDefaults.buttonColors(backgroundColor = Orange)
                 ) {
-                    Text(text = "Next")
+                    Text(text = stringResource(id = R.string.next))
                 }
             }
         },
@@ -94,7 +99,7 @@ fun MapScreen(navHostController: NavHostController) {
         GoogleMap(
             modifier = Modifier.fillMaxSize(),
             properties = MapProperties(
-                mapStyleOptions = if (isSystemInDarkTheme()) MapStyleOptions(
+                mapStyleOptions = if (isSystemInDarkTheme() || isDarkTheme == 2) MapStyleOptions(
                     MapStyle.darkMap
                 ) else
                     null

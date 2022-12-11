@@ -28,6 +28,7 @@ fun MapDetailScreen(navHostController: NavHostController) {
     var clicked by remember {
         mutableStateOf(false)
     }
+    val snackText = stringResource(R.string.enter_l_name)
     if (clicked) {
         LaunchedEffect(key1 = Unit) {
             viewModel.saveLocationName(text)
@@ -66,7 +67,7 @@ fun MapDetailScreen(navHostController: NavHostController) {
                         clicked = true
                     } else {
                         coroutineScope.launch {
-                            scaffoldState.snackbarHostState.showSnackbar("Enter location name!")
+                            scaffoldState.snackbarHostState.showSnackbar(snackText)
                         }
                     }
                 }, modifier = Modifier
@@ -75,7 +76,7 @@ fun MapDetailScreen(navHostController: NavHostController) {
                     .height(48.dp),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Orange)
             ) {
-                Text(text = "Next")
+                Text(text = stringResource(R.string.next))
             }
         }
     ) { padding ->
@@ -92,12 +93,14 @@ fun MapDetailScreen(navHostController: NavHostController) {
                     .fillMaxWidth()
                     .padding(horizontal = 15.dp),
                 label = {
-                    Text(text = "Location name")
+                    Text(text = stringResource(R.string.l_name))
                 },
                 colors = TextFieldDefaults.textFieldColors(
                     cursorColor = Orange,
                     focusedIndicatorColor = Orange,
-                    focusedLabelColor = Orange
+                    focusedLabelColor = Orange,
+                    unfocusedIndicatorColor = Color.Gray,
+                    unfocusedLabelColor = Color.Gray
                 )
             )
         }
